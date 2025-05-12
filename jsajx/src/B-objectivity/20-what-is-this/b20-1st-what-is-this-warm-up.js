@@ -1,3 +1,5 @@
+// "use strict";
+
 import { assertThat } from '../../j4b1-assert.js'
 /**
  * b20-what-is-this
@@ -10,9 +12,12 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Postaraj się zastosować zasadę "DRY" - Don't Repeat Yourself
  */
 
-function sayYourName() {
+const sayYourName = function () {
+	// console.log(this);
 	return this.fullName;
 }
+
+// sayYourName(); //=
 
 const personJen = {
 	fullName: 'Jen Barber',
