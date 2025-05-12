@@ -12,12 +12,18 @@ import { assertThat } from '../../j4b1-assert.js'
 
 const personJen = {
 	fullName: 'Jen Barber',
-	profession: 'IT Manager'
+	profession: 'IT Manager',
+	sayYourName() {
+		return this.fullName;
+	}
 }
 
 const personRoy = {
 	fullName: 'Roy Trenneman',
-	profession: 'The IT Guy'
+	profession: 'The IT Guy',
+	sayYourName() {
+		return this.fullName;
+	}
 }
 
 // #Reguła:
