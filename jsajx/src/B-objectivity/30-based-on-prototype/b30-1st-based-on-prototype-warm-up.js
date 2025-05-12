@@ -10,13 +10,38 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Postaraj się zastosować zasadę "DRY" - Don't Repeat Yourself 😎
  */
 
-function Person(fullName = '') {
-	this.fullName = fullName;
+// function Person(fullName = '') {
+// 	this.fullName = fullName;
+// 	// this.introduce = function() {
+// 	// 	return `My name is ${this.fullName}`
+// 	// }
+// }
+
+class Person {
+	constructor(fullName) {
+		this.fullName = fullName;
+	}
 }
+
+console.log(Person instanceof Function);
+console.log(Person instanceof Object);
+
+console.log(Person.prototype);
 
 const actor = new Person('Richard Ayoade');
 const theItGuy = new Person('Maurice Moss');
 const theBoss = new Person('Douglas Reynholm');
+
+//actor.introduce = introduce;
+//theItGuy.introduce = introduce;
+//theBoss.introduce = introduce;
+
+console.log(actor instanceof Person)
+console.log(actor instanceof Object)
+
+Person.prototype.introduce = function () {
+	return `My name is ${this.fullName}`
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
