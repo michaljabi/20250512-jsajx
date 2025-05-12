@@ -23,9 +23,10 @@ let maxValue = 0;
 	// #Reguła:
   // Nie możesz w środku tego scope'a zmieniać kodu!
 	console.log('ModuleName', moduleName);
+	// console.log(initialValue)
 
 	maxValue = initialValue;
-})();
+})('hel', 8000);
 
 
 // #Reguła:
