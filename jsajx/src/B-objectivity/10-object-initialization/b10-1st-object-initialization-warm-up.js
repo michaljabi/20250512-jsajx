@@ -10,15 +10,24 @@ import { assertThat } from '../../j4b1-assert.js'
  * - musisz dopisać cały kod, potrzebny do poprawnego działania przypadków testowych
  */
 
-
+const myItCrowd = {
+	characters: {
+		list: ['Maurice', 'Jen', 'Roy']
+	},
+	office: {
+		answerPhone() {
+			return 'Have you tried to turn it off and on again?'
+		}
+	}
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
-assertThat(
+console.log(assertThat(
 	'myItCrowd should have a list of [Maurice, Jen, Roy] present',
 	expect => expect(myItCrowd.characters.list.toString()).toBe('Maurice,Jen,Roy')
-)  //=
-assertThat(
+))
+console.log(assertThat(
 	'myItCrowd should have answerPhone method with proper text returned',
 	expect => expect(myItCrowd.office.answerPhone()).toBe('Have you tried to turn it off and on again?')
-)  //=
+))
