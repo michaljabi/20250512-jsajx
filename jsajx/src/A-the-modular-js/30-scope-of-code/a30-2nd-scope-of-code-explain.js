@@ -54,24 +54,34 @@ mySuperCar();
 // tutaj jest to zrobione, aby łatwiej było określić, gdzie się znajdujemy.
 // W rzeczywistym kodzie raczej nie spotkamy takich konstrukcji (😅).
 // Służy ona wyłączenie sprawdzeniu, jak zachowuje się przeszukiwanie scope w JS.
-const myColor = 'red';
+// const myColor = 'red';
+
+
+
+
 (function inception() {
-	const myColor = 'cristal';
+	// const myColor = 'cristal';
 
 	(function secondDream() {
-		const myColor = 'sapphire';
+		//const myColor = 'sapphire';
+		// global.myColor = 'green';
 
 		(function thirdDream() {
 			const myColor = 'emerald';
 
 			(function fourthDream() {
-				const myColor = 'diamond';
+				const myColor2 = 'diamond';
 				// komentuj po kolei idąc z tego scope odwołanie do stałem myColor - aby zobaczyć jak będzie się zachowywać
+				console.log(myColor2);
 				console.log(myColor);
 			})()
+			
+			//console.log(myColor)
 		})();
 	})();
 })();
+
+
 
 // Przykład powyżej ukazuje jak JavaScript przeszukuje outer-scope jeśli nie znajdzie lokalnej zmiennej lub stałej,
 // o którą prosimy.
