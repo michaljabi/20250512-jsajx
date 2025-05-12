@@ -1,3 +1,5 @@
+//"use strict";
+
 import { assertThat } from "../j4b1-assert.js";
 
 const x = 10;
@@ -7,6 +9,27 @@ console.log(x + 100);
 
 // Możesz również zrobić to w kodzie, za pomocą: //= (jeśli używasz JavaScript REPL)
 x + 200; //=
+
+
+hello();
+
+try {
+  throw new Error('oh no !')
+} catch (e) {
+  console.log('catch', e.message)
+}
+
+hello();
+hello();
+hello();
+
+function hello() {
+  console.log('!')
+}
+
+
+
+// console.log() //=
 
 // Pod przykładem będą testy, które same z siebie sprawdzają poprawność:
 
@@ -21,6 +44,12 @@ assertThat("x + 300 should equal 310", (expect) => expect(x + 300).toBe(310)); /
 
 // Spróbuj naprawić poniższe 3 testy, żeby pokazywały "✅ PASS",
 // Jednak NIE MOŻESZ RUSZAĆ kodu samego testu. Nie wolno Ci go zmieniać:
+
+const myValue = 680;
+
+// myValue += 560;
+
+console.log(global.myValue)
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
