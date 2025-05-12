@@ -14,11 +14,31 @@ import { assertThat } from "../../j4b1-assert.js";
  * - nie można zmieniać istniejącego kodu.
  */
 
+
 var myValue = 2000;
 console.log("Current value is", myValue);
 
-var myValue = 3000;
-console.log("Current value is", myValue);
+(function () {
+  var myValue = 3000;
+  console.log("Current value is", myValue);
+})();
+
+
+for(let x = 10; x <= 20; x++) {
+  console.log(x)
+}
+
+//console.log(x);
+
+(() => {});
+
+// function myValue() {}
+
+// function runMe() {
+// var myValue = 3000;
+// console.log("Current value is", myValue);
+// }
+// runMe() 
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
