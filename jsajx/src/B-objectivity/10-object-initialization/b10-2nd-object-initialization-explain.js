@@ -21,30 +21,42 @@ function makePerson() {
 function makePersonWith(name, lastName = 'Doe') {
 	return {
 		name,
-		lastName
+		'last-----___-Name': lastName
 	}
 }
+
+console.log(makePersonWith('Michał', 'Kowalski'))
+console.log(makePersonWith('Michał', 'Nowak'))
+console.log(makePersonWith('Michał', 'Nowak').name)
+console.log(makePersonWith('Michał', 'Nowak')["last-----___-Name"])
 
 // 2) Sposób kolejny to wykorzystanie słowa kluczowego `this` podczas DEKLARACJI funkcji
 // Musimy wtedy funkcję wywołać ze słowem kluczowym `new` - inaczej złe rzeczy zadzieją się w naszej aplikacji
 // Tutaj dostajemy faktyczny konstruktor - również możemy przekazywać parametry i dopisywać je do instancji
 // `this` będzie tutaj reprezentowało instancję naszego nowo tworzonego obiektu.
 function Person() {
-	 this.name = 'Michał';
-	 this.lastName = 'Kowalsky';
+	this.name = 'Michał';
+	this.lastName = 'Kowalsky';
 }
 
+console.log(new Person())
+console.log(new Person())
 
 // 3) Kolejny sposób to wykorzystanie lukru składniowego ze słowem kluczowym `class` - jest to najprzyjemniejsza opcja
 // Jeśli tylko możemy skorzystać z syntaksu ES6 (lub możemy transpilować kod).
 // Tutaj jeśli zapomnimy słowa kluczowego `new` przy tworzeniu instancji obiektów - zostaniemy o tym poinformowani.
 // Dodatkowo - widzimy dokładnie gdzie jest konstruktor, i w prosty sposób możemy dopisywać metody
 class MyPerson {
-	 constructor () {
-		 this.name = 'Michał';
-		 this.lastName = 'Kowalsky';
-	 }
+	constructor(name) {
+		this.name = name;
+		this.lastName = 'Kowalsky';
+	}
 }
+
+console.log(MyPerson)
+
+console.log(new MyPerson('Kasia'))
+console.log(new MyPerson('Marysia'))
 
 // Nie jest konieczne używanie konstruktora, od jednej z wersji po ES6 deklaracja pól, może odbywać się poza konstruktorem
 class MyOtherPerson {
@@ -57,7 +69,7 @@ class MyOtherPerson {
 // Warto przekopiować go sobie do np. https://babeljs.io/repl
 // Zaznaczyć opcje es2015, stage-3 i zobaczyć jak mniej-więcej wygląda nasz kod pod spodem.
 
-const person1 = makePerson();
+const person1 = makePerson(); // POJO Plain Old JS Object
 const person2 = new Person();
 const person3 = new MyPerson();
 const person4 = new MyOtherPerson();
@@ -118,13 +130,13 @@ MyStaticClass.showGreetings()
 // Zapisy są podobne jak w innych językach OOP
 // Jeśli chcemy wykorzystać konstruktor klasy pochodnej musimy odwołać się do klasy bazowej jako super();
 class BaseClass {
-	constructor (name) {
+	constructor(name) {
 		this.name = name;
 	}
 }
 
 class InheritedClass extends BaseClass {
-	constructor (name) {
+	constructor(name) {
 		super(name);
 	}
 }
