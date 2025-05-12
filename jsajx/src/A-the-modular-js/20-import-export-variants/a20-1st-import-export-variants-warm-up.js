@@ -1,4 +1,13 @@
 import { assertThat } from '../../j4b1-assert.js'
+import hellozzz, { mySecretConstant } from './a20-1st-helper.js'
+import { mySecretConstant as m } from './a20-1st-helper.js'
+import * as collection from './a20-1st-helper.js'
+
+console.log(collection)
+console.log(collection.default())
+console.log(collection.mySecretConstant)
+
+
 /**
  * a20-import-export-variants
  * Warm up
@@ -12,7 +21,9 @@ import { assertThat } from '../../j4b1-assert.js'
  * - możesz dodawać kod w obydwu plikach - jednak wykluczając słowa kluczowe: let, const
  */
 
-const mySecretConstant = 'wrong way!';
+// const mySecretConstant = 'wrong way!';
+m; //=
+hellozzz(); //=
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
