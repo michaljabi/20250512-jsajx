@@ -21,12 +21,17 @@ class ShowDepartmentButton {
 	printMyName() {
 		return this.name;
 	}
+	// printMyName = () => {
+	// 	return this.name;
+	// }
 
 	render() {
 		return {
 			type: 'button',
 			name: 'Gotcha !',
-            onClick: this.printMyName,
+            onClick: this.printMyName.bind(this),
+            // onClick: this.printMyName,
+            // onClick: () => this.printMyName(),
 			innerHTML: 'Show your department'
 		}
 	}

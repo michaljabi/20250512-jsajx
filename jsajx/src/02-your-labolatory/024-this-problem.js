@@ -18,3 +18,11 @@ const otherUser = {
 }
 
 otherUser.getRole();
+
+function printMyName ()  {
+	return 90;
+}
+
+// const printMyName = () => {
+// 	return 90;
+// }

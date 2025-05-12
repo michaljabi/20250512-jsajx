@@ -29,6 +29,7 @@ const personRoy = {
 	fullName: 'Roy Trenneman',
 	profession: 'The IT Guy',
 	sayYourName
+	// sayYourName: sayYourName.bind(personJen)
 }
 
 // #Reguła:
