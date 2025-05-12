@@ -12,19 +12,16 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 
-function dressUpAccordingToWeather(weatherProvider, props) {
+function dressUpAccordingToWeather(weatherProvider, {name, lastName, has}) {
 	// #Reguła:
 	// Możesz pisać tylko tutaj
-	const newObj = {
-		name: props.name,
-		lastName: props.lastName,
-		wearing: 'coat'
+	// const {name, lastName, has} = props;
+	return {
+		name,
+		lastName,
+		wearing: weatherProvider === 'sunny' ? 't-shirt' : 'coat',
+		[has]: true
 	}
-	if (weatherProvider === 'sunny') {
-		newObj.wearing = 't-shirt'
-	}
-	newObj[props.has] = true;
-	return newObj;
 }
 
 
