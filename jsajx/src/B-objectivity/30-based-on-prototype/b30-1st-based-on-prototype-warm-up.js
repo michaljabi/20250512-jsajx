@@ -18,8 +18,15 @@ import { assertThat } from '../../j4b1-assert.js'
 // }
 
 class Person {
+
+	static question = '?'
+
 	constructor(fullName) {
 		this.fullName = fullName;
+	}
+
+	static hello() {
+		console.log('!!')
 	}
 }
 
@@ -28,9 +35,20 @@ console.log(Person instanceof Object);
 
 console.log(Person.prototype);
 
+
+
+
 const actor = new Person('Richard Ayoade');
 const theItGuy = new Person('Maurice Moss');
 const theBoss = new Person('Douglas Reynholm');
+
+
+
+
+Person.hello()
+
+Person.question //=
+actor.question //=
 
 //actor.introduce = introduce;
 //theItGuy.introduce = introduce;
@@ -39,9 +57,7 @@ const theBoss = new Person('Douglas Reynholm');
 console.log(actor instanceof Person)
 console.log(actor instanceof Object)
 
-Person.prototype.introduce = function () {
-	return `My name is ${this.fullName}`
-}
+
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
@@ -49,6 +65,11 @@ assertThat(
 	'Actor should be able to introduce himself',
 	expect => expect(actor.introduce()).toBe('My name is Richard Ayoade')
 )  //=
+
+Person.prototype.introduce = function () {
+	return `My name is ${this.fullName}`
+}
+
 assertThat(
 	'It Guy should be able to introduce himself',
 	expect => expect(theItGuy.introduce()).toBe('My name is Maurice Moss')
