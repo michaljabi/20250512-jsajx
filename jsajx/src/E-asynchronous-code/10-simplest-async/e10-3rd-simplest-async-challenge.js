@@ -28,6 +28,12 @@ const DZej = {
 	getJSON(url, callback) {
 		// #Reguła:
 		// Kodzik można pisać i zmieniać tylko w tym bloku.
+		console.log(url);
+		if (url.endsWith('/it')) {
+			callback({ message: 'did you try?' }, null)
+		} else {
+			callback(null, { status: 404, message: 'Invalid URL!' })
+		}
 	}
 }
 
@@ -52,7 +58,7 @@ DZej.getJSON('https://reynholm-industries.com/not-existing', (data, error) => {
 assertThat(
 	'',
 	expect => expect(secondAjaxResult).toEqual({
-		error: {status: 404, message: 'Invalid URL!'},
+		error: { status: 404, message: 'Invalid URL!' },
 		data: null
 	})
 )//=
