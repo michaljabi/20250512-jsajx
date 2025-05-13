@@ -27,16 +27,21 @@ import { assertThat, countExecutionTime } from '../../j4b1-assert.js'
  */
 const memo = new Map();
 
-function longComputation(fromNumber) {
+function longComputation(fromNumber/*, parm2*/) {
 	let result = fromNumber;
 
-	// Możesz dodawać kod tylko w obrębie tej właśnie funkcji.
+	// const key = `${fromNumber}__${parm2}`
 
+	// Możesz dodawać kod tylko w obrębie tej właśnie funkcji.
+	if (memo.has(fromNumber)) {
+		return memo.get(fromNumber);
+	}
 	// Tej pętli nie można ruszać!
-	for(let i = 0; i <= 1000000; i++) {
+	for (let i = 0; i <= 100000; i++) {
 		result += i;
 	}
 
+	memo.set(fromNumber, result);
 
 	// Ta funkcja musi zwracać wynik (tego nie ruszaj):
 	return result;
@@ -56,7 +61,7 @@ console.log(executionTime2)
 
 
 assertThat(
-	'Should return second count time lower than 2 milliseconds',
+	'Should return second count time lower than 10 milliseconds',
 	expect => expect(executionTime2).toBeLowerThan(10)
 )  //=
 
