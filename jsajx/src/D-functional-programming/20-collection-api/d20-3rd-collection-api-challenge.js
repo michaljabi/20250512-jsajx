@@ -25,27 +25,27 @@ import { assertThat, countExecutionTime } from '../../j4b1-assert.js'
  * - nie możesz usuwać istniejącego kodu
  * - możesz jedynie dodawać nowy kod
  */
-const memo = new Map();
+// const memo = new Map();
 
-function longComputation(fromNumber/*, parm2*/) {
+const longComputation = memoize((fromNumber/*, parm2*/) => {
 	let result = fromNumber;
 
 	// const key = `${fromNumber}__${parm2}`
 
 	// Możesz dodawać kod tylko w obrębie tej właśnie funkcji.
-	if (memo.has(fromNumber)) {
-		return memo.get(fromNumber);
-	}
+	// if (memo.has(fromNumber)) {
+	// 	return memo.get(fromNumber);
+	// }
 	// Tej pętli nie można ruszać!
 	for (let i = 0; i <= 100000; i++) {
 		result += i;
 	}
 
-	memo.set(fromNumber, result);
+	// memo.set(fromNumber, result);
 
 	// Ta funkcja musi zwracać wynik (tego nie ruszaj):
 	return result;
-}
+})
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
@@ -80,3 +80,18 @@ assertThat(
 	'Should return second count time lower than 6 milliseconds',
 	expect => expect(anotherExecutionTime2).toBeLowerThan(10)
 )  //=
+
+
+// Koncepcyjny generyczny memoize dla dowolnej funkcji
+function memoize(originalFn) {
+	const memo = new Map();
+
+	return (...args) => {
+		if (memo.has(args[0])) {
+			return memo.get(args[0]);
+		}
+		const result = originalFn(...args)
+		memo.set(args[0], result)
+		return result;
+	}
+}
