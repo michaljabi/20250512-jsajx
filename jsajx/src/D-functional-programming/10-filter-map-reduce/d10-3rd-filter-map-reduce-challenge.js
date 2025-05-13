@@ -1,3 +1,4 @@
+import { stringHelper } from '../../A-the-modular-js/20-import-export-variants/a20-challenge-project/czesuaf-util.js';
 import { assertThat } from '../../j4b1-assert.js'
 /**
  * d10-filter-map-reduce
@@ -26,10 +27,12 @@ const backendApiRequest = () => [
 ];
 const emailData = backendApiRequest();
 
+const { capitalize } = stringHelper;
+
 // Tutaj możesz pisać:
-const showNamesOnly = emailData;
-const showWomanNamesOnly = emailData;
-const showEmailsWithDomainSiteCom = emailData;
+const showNamesOnly = emailData.map(email => email.split('@')[0]).map(capitalize);
+const showWomanNamesOnly = showNamesOnly.filter(name => name.toLowerCase().endsWith('a'));
+const showEmailsWithDomainSiteCom = emailData.filter(email => email.endsWith('@site.com'));
 
 
 // #Reguła:
@@ -41,10 +44,10 @@ assertThat(
 
 assertThat(
 	'Second component should consume data as Woman names only',
-	expect => expect(showWomanNamesOnly).toEqual(['Jadwiga','Henryka','Anna'])
+	expect => expect(showWomanNamesOnly).toEqual(['Jadwiga', 'Henryka', 'Anna'])
 )  //=
 
 assertThat(
 	'Third component should have @site.com emails as data provided',
-	expect => expect(showEmailsWithDomainSiteCom).toEqual(['adrian@site.com','stefan@site.com','anna@site.com'])
+	expect => expect(showEmailsWithDomainSiteCom).toEqual(['adrian@site.com', 'stefan@site.com', 'anna@site.com'])
 )  //=
