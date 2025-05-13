@@ -29,11 +29,21 @@ const emailData = backendApiRequest();
 
 const { capitalize } = stringHelper;
 
-// Tutaj możesz pisać:
-const showNamesOnly = emailData.map(email => email.split('@')[0]).map(capitalize);
-const showWomanNamesOnly = showNamesOnly.filter(name => name.toLowerCase().endsWith('a'));
-const showEmailsWithDomainSiteCom = emailData.filter(email => email.endsWith('@site.com'));
+const pluckNameFormEmail = email => email.split('@')[0];
+const isAWomanName = name => name.toLowerCase().endsWith('a');
+const isSiteCom = email => email.endsWith('@site.com');
+// robimy generycznie, koncept1:
+// const endsWithDomain = (email, domain = 'site.com') => email.endsWith(`@${domain}`);
+// koncept2:
+const endsWithDomain = (domain = 'site.com') => (email) => email.endsWith(`@${domain}`);
 
+// Tutaj możesz pisać:
+const showNamesOnly = emailData.map(pluckNameFormEmail).map(capitalize);
+const showWomanNamesOnly = showNamesOnly.filter(isAWomanName);
+// const showEmailsWithDomainSiteCom = emailData.filter(email => endsWithDomain(email, 'site.com'));
+const showEmailsWithDomainSiteCom = emailData.filter(endsWithDomain());
+
+endsWithDomain()('hello@michal.com'); //=
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:

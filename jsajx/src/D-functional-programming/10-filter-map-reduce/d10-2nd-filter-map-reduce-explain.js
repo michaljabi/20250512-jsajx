@@ -53,7 +53,7 @@ if (value || value === 0) {
 console.log(11 % 2)
 console.log(12 % 2)
 
-const oddNumbers = [1, 2, 3, 4, 5].filter((_, idx)=> idx % 2);
+const oddNumbers = [1, 2, 3, 4, 5].filter((_, idx) => idx % 2);
 console.log(oddNumbers);
 
 // "Redukcja" elementów
@@ -80,20 +80,31 @@ console.log(inCash);
 
 // Korzystając z bardziej funkcyjnego podejścia można to zapisać bardziej przejrzyście:
 
+const operationType = (type) => o => o.type === type;
+
+function operationType2(type) {
+	return function (o) {
+		return o.type === type
+	}
+}
+
+operationType2('IN')({ type: 'IN' }) //=
+
+
 const operationTypeIn = o => o.type === 'IN';
 export const pluckCash = o => o.cash;
 const sum = (a, b) => a + b;
 
 pluckCash({ cash: 3020 }) //=
 
-console.log(cashBalance.filter(operationTypeIn).map(pluckCash).reduce(sum));
+console.log(cashBalance.filter(operationType('IN')).map(pluckCash).reduce(sum));
 
 // Teraz nasze małe pomocnicze funkcje są re-używalne, możemy szybko policzyć aktualny stan konta
 const currentBalance = cashBalance.map(pluckCash).reduce(sum);
 console.log(currentBalance);
 
 // Dodając dodatkowy filtr - możemy policzyć obciążenia:
-const operationTypeOut = o => o.type === 'OUT';
+const operationTypeOut = operationType('OUT')
 console.log(cashBalance.filter(operationTypeOut).map(pluckCash).reduce(sum));
 
 // Ilość przykładów można mnożyć:
