@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>New -- modular -- JS in browser</title>
 </head>
+
 <body>
     <h1 id="heading-1"></h1>
     <script type="module">
         let ten = 10;
         const $header = document.querySelector('#heading-1');
-        $header.innerHTML = 'Hello, today we will count to ' + ten;
+        $header.innerHTML = 'Hello, today we will ' + ten;
+
+
+        $header.addEventListener('click', () => {
+            console.log('HELLO')
+        })
+
+        $header.addEventListener('click', () => {
+            console.log('click !')
+        })
+
+        $header.addEventListener('mouseover', () => {
+            console.log('mouseover')
+        })
     </script>
     <script type="module">
         let ten = 11;
@@ -19,4 +34,5 @@
         console.log('How much is:', ten);
     </script>
 </body>
+
 </html>
