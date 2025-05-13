@@ -1,3 +1,5 @@
+// @ts-check
+
 import { assertThat } from '../../j4b1-assert.js'
 /**
  * d10-filter-map-reduce
@@ -10,7 +12,32 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Transformując dane staraj się korzystać z programowania funkcyjnego (metody tablicowe)
  */
 
+let hello = '';
+const myHello = 'HELLO';
 
+
+function capitalize(sentence = '') {
+	return sentence.charAt(0).toUpperCase() + sentence.slice(1).toLowerCase();
+}
+
+function kebabCaseToCamelCase(sentence = '') {
+	return sentence.split('-').map((word, idx) => idx === 0 ? word.toLowerCase() : capitalize(word)).join('')
+}
+
+function kebabCaseToPascalCase(sentence = '') {
+	//return sentence.split('-').map((sentence) => sentence.charAt(0).toUpperCase() + sentence.slice(1).toLowerCase()).join('')
+	return sentence.split('-').map(capitalize).join('')
+}
+
+/**
+ * użycie JSDoc (i TS Server nam podpowiada)
+ * @param {string} sentence
+ * 
+ * @returns {string}
+ *  */
+function kebabCaseToSnakeCase(sentence) {
+	return sentence.replaceAll('-', '_')
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
