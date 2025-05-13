@@ -50,17 +50,18 @@ function makeAjaxCall(url, callbackFn) {
 
 // Przykład callback hell:
 makeAjaxCall('https://first', (data, err) => {
-	if(err) {
+	if (err) {
+		// throw new Error('')
 		console.log('error 😐', err)
 		return;
 	}
 	makeAjaxCall('https://second' + data.url, (data, err) => {
-		if(err) {
+		if (err) {
 			console.log('error 😐', err)
 			return;
 		}
 		makeAjaxCall('https://third' + data.url, (data, err) => {
-			if(err) {
+			if (err) {
 				console.log('error 😐', err)
 				return;
 			}
@@ -105,8 +106,17 @@ provider
 
 // zobacz jak upraszcza nam to przykład z callback hell:
 
+// ta medotoda 
+// Promise.reject(new Error('!'))
+// to skrót od:
+// new Promise((_, reject) => reject(new Error('!')))
+
+
 function makeAjaxCallAsPromise(url) {
 	// Albo:
+	if (url.startsWith('https://third')) {
+		return Promise.reject(new Error('reject'))
+	}
 	return Promise.resolve('resolved');
 	// Albo:
 	// return Promise.reject(new Error('reject'));
@@ -114,16 +124,34 @@ function makeAjaxCallAsPromise(url) {
 
 makeAjaxCallAsPromise('https://first')
 	.then((data) => {
+		// throw new Error('error here...!')
 		return makeAjaxCallAsPromise('https://second' + data.url);
 	})
 	.then((data) => {
-		return makeAjaxCallAsPromise('https://third' + data.url);
+		console.log(data);
+		return { url: 'test' }
+	})
+	.then((data) => {
+		console.log(data)
+		// throw new Error('error here...!')
+		// return makeAjaxCallAsPromise('https://third' + data.url);
+	})
+	.then((data) => {
+		console.log('THIS IS COOLNESS !!!', data);
+	})
+	.then((data) => {
+		console.log('THIS IS COOLNESS !!!', data);
+		return 789
+	})
+	.then((data) => {
+		console.log('THIS IS COOLNESS !!!', data);
+		return Promise.resolve('abcdef')
 	})
 	.then((data) => {
 		console.log('THIS IS COOLNESS !!!', data);
 	})
 	.catch((err) => {
-		console.log('error 😐', err)
+		console.log('error 😐', err.message)
 	})
 
 // Z promise - mamy 2 opcje:
