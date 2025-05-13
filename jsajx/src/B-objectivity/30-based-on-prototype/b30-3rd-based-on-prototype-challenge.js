@@ -1,3 +1,4 @@
+import { stringHelper } from '../../A-the-modular-js/20-import-export-variants/a20-challenge-project/czesuaf-util.js';
 import { assertThat } from '../../j4b1-assert.js'
 /**
  * b30-based-on-prototype
@@ -20,7 +21,13 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Nie można tylko ruszać kodziku z asercjami!
  */
 
+String.prototype.last = function() {
+	return this.slice(-1);
+}
 
+String.prototype.capitalize = function() {
+	return stringHelper.capitalize(this)
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
