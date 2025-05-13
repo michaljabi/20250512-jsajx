@@ -37,8 +37,13 @@ const isSiteCom = email => email.endsWith('@site.com');
 // koncept2:
 const endsWithDomain = (domain = 'site.com') => (email) => email.endsWith(`@${domain}`);
 
+
+// Function composition |> (zobacz: pipeline operator)
+const pluckNameFromEamailAndCapitalize = (email) => capitalize(pluckNameFormEmail(email))
+
 // Tutaj możesz pisać:
-const showNamesOnly = emailData.map(pluckNameFormEmail).map(capitalize);
+// const showNamesOnly = emailData.map(pluckNameFormEmail).map(capitalize);
+const showNamesOnly = emailData.map(pluckNameFromEamailAndCapitalize);
 const showWomanNamesOnly = showNamesOnly.filter(isAWomanName);
 // const showEmailsWithDomainSiteCom = emailData.filter(email => endsWithDomain(email, 'site.com'));
 const showEmailsWithDomainSiteCom = emailData.filter(endsWithDomain());
