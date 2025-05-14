@@ -86,6 +86,10 @@ myMachine.makeACoffee();
 myMachine.makeACoffee();
 myMachine.makeACoffee();
 
+// console.log(myMachine.constructor.name) 
+// console.log({}.constructor.name) 
+
+
 console.log(myMachine)
 // Nagle "przypomniało nam się" że nie posiadamy metody do czyszczenia fusów z tacki
 // Co teraz ?
