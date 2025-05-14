@@ -17,6 +17,7 @@ const draft = {};
 function makeSnapshot() {
 	return new Proxy(person, {
 		set(target, prop, value) {
+			// tutaj jest decyzja czy modyfikujemy obiekt oryginalny
 			// target[prop] = value;
 		}
 	})
