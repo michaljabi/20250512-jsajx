@@ -20,6 +20,19 @@ import { assertThat } from '../../j4b1-assert.js'
 const vintageCuckooClock = {
 	// #Reguła:
 	// Kodzik można pisać tylko tutaj w środku.
+	hours: 20,
+	minutes: 11,
+	seconds: 44,
+	get lcdTime() {
+		// .toString().padStart(2, '0')
+		return [this.hours, this.minutes, this.seconds].join(':')
+	},
+	set lcdTime(time) {
+		const [hours, minutes, seconds] = time.split(':')
+		this.hours = Number(hours);
+		this.minutes = Number(minutes);
+		this.seconds = Number(seconds);
+	}
 }
 
 // #Reguła:
