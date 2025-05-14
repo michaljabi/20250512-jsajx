@@ -22,10 +22,10 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 
-const hashSecretCode = 'hash';
+const hashSecretCode = Symbol();
 
 function makeAUser(name, hash) {
-	 return {name, [hashSecretCode]: hash};
+	return { name, [hashSecretCode]: hash, sayHello() { }, myDate: new Date() };
 }
 
 // #Reguła:
@@ -38,7 +38,13 @@ assertThat(
 ) //=
 
 const serializeUser1 = JSON.stringify(user1);
+
+console.log(serializeUser1);
 const unSerializedUser1 = JSON.parse(serializeUser1);
+
+console.log(unSerializedUser1);
+console.log(new Date(unSerializedUser1.myDate));
+
 // Jednak po serializacji i deserializacji nie chcemy aby była możliwość odczytania sekretnego hash'a:
 assertThat(
 	'Secret hash should not be serialized and deserialized',
