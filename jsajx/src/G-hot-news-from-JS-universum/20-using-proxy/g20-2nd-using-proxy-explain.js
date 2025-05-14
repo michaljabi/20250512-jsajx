@@ -12,23 +12,46 @@ const person = {
 	name: 'Michał'
 }
 
+
+const draft = {};
+function makeSnapshot() {
+	return new Proxy(person, {
+		set(target, prop, value) {
+			// target[prop] = value;
+		}
+	})
+}
+
+const snap = makeSnapshot();
+
+snap.lastName = '?'
+// person = {};
+
 // Można go rozwijać np. o dodatkowe pola dynamicznie:
-person.lastName = 'Kowalsky'
+// person.name = 'Kowalsky'
+snap.lastName = 'Kowalsky'
+snap.age = 10
+
+// delete person.name;
 
 console.log(person);
+
+
+console.log(person.name)
+console.log(person.lastName)
+console.log(person.any)
+console.log(person.nonExsitent)
+
+
+
+
 
 // Póki co bez rewelacji....
 // Co jednak gdybyśmy zapakowali go sobie we Wrapper - pozwalający nam totalnie kontrolować co się dzieje z obiektem?
 
 // Przykładowo, za każdym razem gdy poprosisz o pole w obiekcie - ja zwrócę wartość "TROLL" 😁.
 
-const myTroll = new Proxy(person, {
-	get ( target, propertyKey ) {
-		// console.log(propertyKey)
-		// console.log(target[propertyKey])
-		return 'TROLL'
-	}
-})
+const myTroll = new Proxy(person, {})
 
 console.log(myTroll.name)
 console.log(myTroll.lastName)
@@ -66,7 +89,7 @@ const someOtherSample = {
 }
 
 const sideEffects = new Proxy(someOtherSample, {
-	get ( target, propertyKey ) {
+	get(target, propertyKey) {
 		console.log(propertyKey)
 		// zauważ że pułapka działa, jednak my nie zwracamy żadnej wartości
 		// dlatego pola mają dają nam "undefined"
@@ -83,10 +106,10 @@ console.log(sideEffects.hello)
 
 const myProject = new Proxy({}, {
 	deleteProperty(target, propertyKey) {
-		if (propertyKey in target){
+		if (propertyKey in target) {
 			// faktycznie usuwamy:
 			delete target[propertyKey]
-			console.log('usuwam:',propertyKey)
+			console.log('usuwam:', propertyKey)
 			return true
 		}
 		console.log('nie znalazłem:', propertyKey)

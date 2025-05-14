@@ -6,23 +6,30 @@ const person = {
 	name: 'Michał'
 }
 
+
+// const personProxy = {
+// 	name: 'Rafal',
+// 	_changed: true
+// }
+
+
 function loggerFactory(object) {
 
 	const logger = [];
-	for(const [key, value] of Object.entries(object)) {
+	for (const [key, value] of Object.entries(object)) {
 		logger.push({ date: new Date().getTime(), key, value, method: 'POST' });
 	}
 	return new Proxy(object, {
-		get ( target, key ) {
-			if(key === 'log') {
+		get(target, key) {
+			if (key === 'log') {
 				return () => logger;
 			}
 			return Reflect.get(target, key);
 		},
 		set(target, key, value) {
-			if(key !== 'log') {
+			if (key !== 'log') {
 				const method = Reflect.has(target, key) ? 'UPDATE' : 'POST';
-				logger.push({ date: new Date().getTime(), key, value, method});
+				logger.push({ date: new Date().getTime(), key, value, method });
 				Reflect.set(target, key, value);
 			}
 		}
