@@ -10,17 +10,17 @@
 
 // Zacznijmy od 1 faktu:
 // Najprostszą kolekcją iterowalną w JavaScript - jest String, udowadnia to poniższy zapis:
-for(const l of 'letters') {
+for (const l of 'letters') {
 	console.log(l);
 }
 
 // Nie mniej łatwo przedostać się przez zawartość tablicy:
-for(const num of [100, 200, 300]) {
+for (const num of [100, 200, 300]) {
 	console.log(num);
 }
 
 // Podobnie będzie w przypadku - Set, Map etc.
-for(const [key, value] of new Map([['id-1', 'HOT'], ['id-2', 'COFFEE'], ['id-1', 'OVERWRITTEN']])){
+for (const [key, value] of new Map([['id-1', 'HOT'], ['id-2', 'COFFEE'], ['id-1', 'OVERWRITTEN']])) {
 	console.log(key)
 	console.log(value)
 }
@@ -30,12 +30,31 @@ for(const [key, value] of new Map([['id-1', 'HOT'], ['id-2', 'COFFEE'], ['id-1',
 // GENERATORY:
 // Funkcje które mają możliwość "zatrzymania" swojego wykonania i zwrócenia wartości.
 
-function *generate4Numbers() {
+function* generate4Numbers() {
 	yield 100;
 	yield 200;
 	yield 300;
 	yield 400;
 }
+
+const ref = generate4Numbers()
+
+const int = setInterval(() => {
+	const { value } = ref.next()
+	if (value) {
+		console.log(value)
+	} else {
+		clearInterval(int)
+	}
+}, 2000)
+
+const ref2 = generate4Numbers()
+console.log(ref2.next());
+console.log(ref2.next());
+// console.log(ref.next()); 
+// console.log(ref.next()); 
+// console.log(ref.next()); 
+console.log(generate4Numbers().next().value);
 
 // Na początek potraktujmy generator jako standardową funkcję:
 generate4Numbers() //=
@@ -56,12 +75,12 @@ generate4Numbers().next() //=
 // Żeby wyciągnąć numery po kolei - musimy skorzystać z tego samego wskaźnika:
 
 const iterator = generate4Numbers();
-iterator.next() //=
-iterator.next() //=
-iterator.next() //=
-iterator.next() //=
-iterator.next() //=
-iterator.next() //=
+// iterator.next() //=
+// iterator.next() //=
+// iterator.next() //=
+// iterator.next() //=
+// iterator.next() //=
+// iterator.next() //=
 
 // Super, teraz działa tak jak powinno. Na sam koniec - jak nie ma już wartości pod yield - dostajemy
 // { value: undefined, done: true }
@@ -74,7 +93,7 @@ iterator.next() //=
 
 // Jednak, skoro Generator - zwraca iterator, to można go potraktować jako
 // Kolekcja iterowalna !!!:
-for(const num of generate4Numbers()) {
+for (const num of generate4Numbers()) {
 	console.log(num)
 }
 
@@ -108,15 +127,15 @@ stringIterator.next() //=
 
 // Wracając do generatorów:
 // Po przez metodę .next() możemy się z nimi komunikować !!!
-function *coffeeMachine() {
+function* coffeeMachine() {
 	const coffeeAmount = yield 'Podaj ilość kawy w maszynie';
 	const numberOfCups = yield 'Ile kubków przyrządzić?';
 	const maxCups = Math.floor(coffeeAmount / 20); // 20g for a cup
 	const coffeeMade = Math.min(maxCups, numberOfCups);
-	if(coffeeMade < 1) {
+	if (coffeeMade < 1) {
 		return 'Hmmm.... dzisiaj dzień bez kawy?'
 	}
-	return `Proszę, o to ${coffeeMade > 1 ? 'Twoje' : 'Twój'} ${coffeeMade} ${ coffeeMade > 4 ? 'kubków' : coffeeMade > 1 ? 'kubki' : 'kubek'} kawy!`;
+	return `Proszę, o to ${coffeeMade > 1 ? 'Twoje' : 'Twój'} ${coffeeMade} ${coffeeMade > 4 ? 'kubków' : coffeeMade > 1 ? 'kubki' : 'kubek'} kawy!`;
 }
 
 const iter = coffeeMachine();
@@ -129,7 +148,7 @@ console.log(iter.next(cups).value)
 
 // Dzięki procesowi iteracji - możemy to zautomatyzować:
 const goForCoffee = coffeeMachine();
-for(const x of [0, 300, 30]) {
+for (const x of [0, 300, 30]) {
 	console.log(goForCoffee.next(x).value)
 }
 
@@ -150,8 +169,8 @@ iNeedCoffee(2000)(15)
 // Ich zdolność zatrzymywania wykonań słowem yield powoduje - iż możemy utworzyć zapis,
 // np. z pętlą nieskończoną:
 
-function *endlessGenerator() {
-	for(let x = 0;;x++) {
+function* endlessGenerator() {
+	for (let x = 0; ; x++) {
 		yield x;
 	}
 }
@@ -179,18 +198,43 @@ const myUser = {
 // 	console.log(sth)
 // }
 
+const numbers = [1, 2, 4];
+
+console.log(numbers);
+console.log(numbers[0]);
+console.log(numbers[1]);
+console.log(numbers[2]);
+// 
+console.log(numbers[3]);
+
+console.log(numbers.length);
+console.log(numbers[Symbol.iterator]());
+console.log(numbers[Symbol.iterator]().next());
+
+const iterRef = numbers[Symbol.iterator]();
+
+console.log(iterRef.next())
+console.log(iterRef.next())
+console.log(iterRef.next())
+console.log(iterRef.next())
+console.log(iterRef.next())
+console.log(iterRef.next())
+console.log(iterRef.next())
+
+console.log('hello'[Symbol.iterator]().next())
+
 // Jednak z pomocą i implementacją Symbol.iterator + generator:
 const myIterableUser = {
 	name: 'Roy',
 	fruits: ['apples', 'mangoes', 'cherries'],
 	// Możemy określić co ma się dziać po wrzuceniu obiektu do pętli for:
 	*[Symbol.iterator]() {
-		 for(const fruit of this.fruits) {
-		 	  yield fruit;
-		 }
+		for (const fruit of this.fruits) {
+			yield fruit;
+		}
 	}
 }
 
-for(const sth of myIterableUser) {
+for (const sth of myIterableUser) {
 	console.log(sth)
 }
