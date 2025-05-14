@@ -14,6 +14,25 @@
 
 const mySymbol = Symbol();
 
+console.log(1 == 1)
+console.log(1 == '1')
+console.log(1 === '1')
+
+console.log(1 === 1)
+
+// ?
+console.log([] == [])
+
+console.log(new Array() === new Array())
+
+console.log({} === {})
+console.log(new Object() === new Object())
+
+const a = [];
+const b = a;
+
+console.log(a === b);
+
 // Każde wywołanie jest unikatowe:
 console.log(mySymbol);
 console.log(mySymbol === Symbol())
@@ -24,7 +43,7 @@ console.log(Symbol() === Symbol())
 try {
 	new Symbol();
 } catch ( e ) {
-	console.log(e);
+	console.log(e.message);
 }
 
 // Tak więc wywołanie Symbol() - to globalna "factory function" dla symboli.
@@ -33,6 +52,8 @@ try {
 // jednak jest to tylko dla potrzeb "debuggingu"
 
 const mySuperSymbol = Symbol('hello world')
+console.log(mySuperSymbol)
+console.log(mySuperSymbol)
 console.log(mySuperSymbol)
 
 // description absolutnie nie ma wpływu na zachowanie się symbolu:
@@ -51,6 +72,9 @@ const myUser = {
 	[salary]: 3000
 }
 // w prywatnym scope:
+console.log(myUser)
+
+
 console.log(myUser[salary])
 
 // TYMCZASEM NA ZEWNĄTRZ:
