@@ -93,4 +93,4 @@ console.log(mrJohn.showMySalary());
 // pole prywatne nie jest wioczne:
 console.log(mrJohn);
 // pole prywatne nie jest dostępne:
-// console.log(mrJohn.#salary);
+// console.log(mrJohn.salary);

@@ -213,6 +213,11 @@ const arrayLike = {
 	length: 5
 }
 
+// Obiekt arrayLike możemy łatwo przerobić na tablice
+Array.from(arrayLike).forEach((e) => {
+	console.log(e)
+})
+
 // takie odniesienie się do pola, nie jest możliwe:
 // console.log(arrayLike.0)
 // jednak możemy się dostać do wartości następująco:
